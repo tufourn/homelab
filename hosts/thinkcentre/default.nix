@@ -1,12 +1,17 @@
 {
+  inputs,
   modulesPath,
   pkgs,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    inputs.disko.nixosModules.disko
+    inputs.nixos-facter-modules.nixosModules.facter
     ./disko.nix
   ];
+
+  facter.reportPath = ./facter.json;
 
   networking = {
     hostName = "thinkcentre";
